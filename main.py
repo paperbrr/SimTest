@@ -1,4 +1,4 @@
-#this is a comment.
+#this is a comment
 
 from classes import object
 from dependancies import vpy, sleep
