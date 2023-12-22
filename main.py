@@ -29,29 +29,7 @@ def motion():
         displacement = initialVel*T_INT + vpy.vector(acc.x/2, acc.y/2, acc.z/2)*(T_INT**2)
 
         i.velocity = finalVel
-        i.moveTo(i.coords+displacement)
-
-
-def collideCheck():
-
-    for i in object.OBJECTS:
-        for j in object.OBJECTS:
-            if i!=j and i.canCollide and j.canCollide and i.isColliding(j):
-                
-                print(i.mass)
-                print(j.mass)
-                print('------------')
-                print(i.velocity)
-                print(j.velocity)
-                print('------------')
-
-                vFinalI = mulScalarVector((i.mass-j.mass)/(i.mass+j.mass), i.velocity) + mulScalarVector((2*j.mass)/(i.mass+j.mass), j.velocity)
-                print(vFinalI)
-                delP = mulScalarVector(i.mass, vFinalI-i.velocity)
-                print(delP)
-                print('------------')
-
-                return False         
+        i.moveTo(i.coords+displacement)      
 
 
 top = object(radius=1, color=vpy.color.blue, mass=1, static=False, canCollide=True)
