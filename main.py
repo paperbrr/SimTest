@@ -38,16 +38,20 @@ def collideCheck():
         for j in object.OBJECTS:
             if i!=j and i.canCollide and j.canCollide and i.isColliding(j):
                 
-                iniVel1 = i.velocity
-                iniVel2 = j.velocity
-                finVel1 = mulScalarVector((i.mass-j.mass)/(i.mass+j.mass), iniVel1)
-                finVel2 = mulScalarVector((2*i.mass)/(i.mass+j.mass), iniVel1)
+                print(i.mass)
+                print(j.mass)
+                print('------------')
+                print(i.velocity)
+                print(j.velocity)
+                print('------------')
 
-                delP1 = mulScalarVector(-1*i.mass, finVel1-iniVel1)
-                delP2 = mulScalarVector(j.mass, finVel2-iniVel2)
+                vFinalI = mulScalarVector((i.mass-j.mass)/(i.mass+j.mass), i.velocity) + mulScalarVector((2*j.mass)/(i.mass+j.mass), j.velocity)
+                print(vFinalI)
+                delP = mulScalarVector(i.mass, vFinalI-i.velocity)
+                print(delP)
+                print('------------')
 
-                i.applyForce(delP1/T_INT)
-                #j.applyForce(delP2/T_INT)                
+                return False         
 
 
 top = object(radius=1, color=vpy.color.blue, mass=1, static=False, canCollide=True)
@@ -56,9 +60,11 @@ bottom = object(2, vpy.color.cyan, mass=1, static=False, canCollide=True)
 top.moveTo(vpy.vector(0,10,0))
 bottom.moveTo(vpy.vector(0,2,0))
 
-top.applyForce(vpy.vector(0,-5,0))
-bottom.applyForce(vpy.vector(0,5,0))
+#top.applyForce(vpy.vector(0,-5,0))
+#bottom.applyForce(vpy.vector(0,5,0))
 
+top.velocity = vpy.vector(0,-1,0)
+bottom.velocity = vpy.vector(0,1,0)
 
 while True:
     vpy.sleep(T_INT)
